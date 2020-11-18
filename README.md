@@ -2,3 +2,4 @@
 This will be a simple chat-tool.
 
 Hallo!
+Hallo von mir
