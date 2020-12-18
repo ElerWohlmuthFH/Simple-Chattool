@@ -1,3 +1,5 @@
+package at.ac.fhcampuswien;
+
 public class TestClass {
 
     public static void main(){
