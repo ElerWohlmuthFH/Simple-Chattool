@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Server {
     public static void main(String[] args) {
@@ -18,13 +19,19 @@ public class Server {
             DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream()); //forwards input on Client
 
             DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-            String message = (String) inputStream.readUTF();
 
-            String string = message;
-            outputStream.writeUTF(string);
-            outputStream.flush();
-            outputStream.close();
+            System.out.println("Write a message and press Enter to send: ");
+            while (true) {
+                String message = (String) inputStream.readUTF();
+                System.out.println(message);
 
+                Scanner scanner = new Scanner(System.in);
+                String serverInput = scanner.nextLine(); //scanns for User (Server) input
+
+                String string = serverInput;
+                outputStream.writeUTF(string);
+                outputStream.flush();
+            }
 
         } catch (IOException e) {
             System.out.println("Error 2");
