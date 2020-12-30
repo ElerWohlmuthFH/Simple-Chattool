@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.controller.ServerStartController">
+    <children>
+        <MenuBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="600.0" style="-fx-background-color: #609fa6;" VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Theme">
+                            <items>
+                                <CheckMenuItem mnemonicParsing="false" text="Light" />
+                                <CheckMenuItem mnemonicParsing="false" text="Dark" />
+                            </items>
+                        </Menu>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About Simple Chat Tool" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #f5feff;" VBox.vgrow="ALWAYS">
+            <children>
+                <Label alignment="CENTER" layoutY="42.0" maxHeight="80.0" maxWidth="600.0" minHeight="80.0" minWidth="600.0" prefHeight="80.0" prefWidth="600.0" style="&#10;" text="Welcome!" textOverrun="CENTER_ELLIPSIS" wrapText="false" AnchorPane.topAnchor="50.0">
+                    <font>
+                        <Font name="Bangla MN" size="35.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="168.0" layoutY="144.0" text="Port:">
+                    <font>
+                        <Font size="20.0" />
+                    </font></Label>
+                <Button fx:id="btnConnect" defaultButton="true" disable="true" layoutX="386.0" layoutY="221.0" mnemonicParsing="false" onAction="#btnConnectAction" text="Connect" />
+                <TextField fx:id="textFieldPort" alignment="CENTER" layoutX="270.0" layoutY="146.0" onKeyReleased="#keyReleasedProperty" onMouseEntered="#enteredMouseAction" style="-fx-border-color: #e0e0e0; -fx-background-color: #ffff; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 40;" />
+                <Label alignment="BOTTOM_RIGHT" layoutX="286.0" layoutY="262.0" prefHeight="17.0" prefWidth="167.0" style="&#10;" text="made by &quot;Die Gefährten&quot;" textAlignment="RIGHT" textFill="#6b6b6b">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+                <Separator layoutX="169.0" layoutY="207.0" prefHeight="3.0" prefWidth="284.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" />
+                <Separator layoutX="168.0" layoutY="116.0" prefHeight="3.0" prefWidth="284.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="115.0" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
