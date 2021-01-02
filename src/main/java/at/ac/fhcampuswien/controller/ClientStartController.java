@@ -45,8 +45,8 @@ public class ClientStartController implements Initializable{
 
         //Wenn HOST und PORT korrekt sind, dann schließe das alte und öffne das neue Fenster:
         try {
-            socket = new Socket(textFieldHost.getText(), Integer.parseInt(textFieldPort.getText()));
-            if (hostString.equals("localhost") && portString.equals("9999")) {
+            socket = new Socket(hostString, Integer.parseInt(portString));
+            if (hostString.equals("localhost") && portString.equals(String.valueOf(socket.getPort()))) {
                 System.out.println("Connection successful!");
                 PopupWindow.display("Connection successful!");
 
@@ -67,8 +67,8 @@ public class ClientStartController implements Initializable{
                 //Öffne das neue Fenster:
                 //successfullyConnected();
             } else {
-                System.out.println("Connection failed!");
-                PopupWindow.display("Connection failed!\n Wrong Hostname or Port Number");
+                System.out.println("Server connection failed!");
+                PopupWindow.display("Server connection failed!\n Wrong Hostname or Port Number");
             }
         } catch (Exception e) {
             e.printStackTrace();

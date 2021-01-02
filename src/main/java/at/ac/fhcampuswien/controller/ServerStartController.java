@@ -32,11 +32,11 @@ public class ServerStartController {
         String portString = textFieldPort.getText();
 
         try {
-            serverSocket = new ServerSocket(Integer.parseInt(textFieldPort.getText()));
+            serverSocket = new ServerSocket(Integer.parseInt(portString));
             System.out.println("Ready for connection...");
             socket = serverSocket.accept();
 
-            if (portString.equals("9999")) {
+            if (portString.equals(String.valueOf(socket.getLocalPort()))) {
                 System.out.println("Connection to Client was successful!");
                 PopupWindow.display("Connection to Client was successful!");
 
@@ -51,8 +51,8 @@ public class ServerStartController {
 
                 new ReceiveMessageThreadForServer(socket, ClientChatController.class.getSimpleName()).start();
             } else {
-                System.out.println("Connection failed!");
-                PopupWindow.display("Connection failed!\n Port Number");
+                System.out.println("Client connection failed!");
+                PopupWindow.display("Client  connection failed!\n Port Number");
             }
         } catch (Exception e) {
             e.printStackTrace();
