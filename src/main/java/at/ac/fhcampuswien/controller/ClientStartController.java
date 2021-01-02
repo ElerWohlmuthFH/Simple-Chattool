@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 public class ClientStartController implements Initializable{
@@ -46,7 +47,7 @@ public class ClientStartController implements Initializable{
         //Wenn HOST und PORT korrekt sind, dann schließe das alte und öffne das neue Fenster:
         try {
             socket = new Socket(hostString, Integer.parseInt(portString));
-            if (hostString.equals("localhost") && portString.equals(String.valueOf(socket.getPort()))) {
+            if (socket.isConnected() && portString.equals(String.valueOf(socket.getPort()))) {
                 System.out.println("Connection successful!");
                 PopupWindow.display("Connection successful!");
 
@@ -70,6 +71,8 @@ public class ClientStartController implements Initializable{
                 System.out.println("Server connection failed!");
                 PopupWindow.display("Server connection failed!\n Wrong Hostname or Port Number");
             }
+        } catch (UnknownHostException e) {
+            PopupWindow.display("Server connection failed!\n Cannot find host '" + hostString + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }
