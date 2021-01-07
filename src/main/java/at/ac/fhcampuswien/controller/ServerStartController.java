@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +29,7 @@ public class ServerStartController {
     private TextField textFieldPort;
 
     @FXML
-    void btnConnectAction(ActionEvent event) throws Exception {
+    void btnConnectAction(ActionEvent event) {
         String portString = textFieldPort.getText();
 
         try {
@@ -37,7 +38,6 @@ public class ServerStartController {
             socket = serverSocket.accept();
 
             if (portString.equals(String.valueOf(socket.getLocalPort()))) {
-                System.out.println("Connection to Client was successful!");
                 PopupWindow.display("Connection to Client was successful!");
 
                 Parent root = FXMLLoader.load(getClass().getResource("/ServerChatScreen.fxml"));
@@ -51,7 +51,6 @@ public class ServerStartController {
 
                 new ReceiveMessageThreadForServer(socket, ClientChatController.class.getSimpleName()).start();
             } else {
-                System.out.println("Client connection failed!");
                 PopupWindow.display("Client  connection failed!\n Port Number");
             }
         } catch (Exception e) {
@@ -61,7 +60,7 @@ public class ServerStartController {
 
     @FXML
     void enteredMouseAction(MouseEvent event) {
-        textFieldPort.setTooltip(ToolTipWindow.createToolTip("Port mind. 4 Zeichen"));
+        textFieldPort.setTooltip(ToolTipWindow.createToolTip("Gib bitte mind. 4 Ziffern ein!"));
     }
 
     @FXML
@@ -72,4 +71,11 @@ public class ServerStartController {
         btnConnect.setDisable(isDisabled);
     }
 
+    @FXML
+    private MenuItem menuQuit;
+    @FXML
+    void quitAction(ActionEvent event) {
+        PopupWindow.display("Disconnected!");
+        System.exit(0);
+    }
 }

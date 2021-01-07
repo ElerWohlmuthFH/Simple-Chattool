@@ -1,0 +1,33 @@
+                       --------- READ ME --------
+                ---------------------------------------
+                        Project "Simple Chat Tool"
+                            By "Die Gefährten"
+                ---------------------------------------
+
+Requirements:
+JavaFX Set-Up
+
+JavaFX Library:
+Quelle: https://gluonhq.com/products/javafx/
+
+Make a Path to the Library:
+IntelliJ --> Preferences --> Appearance & Behaviour --> Path Variables --> +
+--- Name: PATH_TO_FX ---
+--- Path: /lib       ---
+
+Add Library to your Project:
+File --> Project Structure --> Project Settings --> Libraries --> +/Java (add only the.jar Files)
+
+Change Run Configurations:
+Class --> Run --> Edit Configurations --> VM Options:
+--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml
+
+
+How to use this Program:
+1. Start the ServerApp
+2. Enter Port Number and press Connect Button
+3. Start ClientAPP
+4. Enter the Host and Port Number
+(If you run the App from the same PC, the Host is "localhost")
+5. Press Connect Button
+6. If you want to disconnect, click on File, then disconnect.

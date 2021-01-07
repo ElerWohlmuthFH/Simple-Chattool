@@ -23,7 +23,6 @@ public class ReceiveMessageThread extends Thread {
                 inputStream = new DataInputStream(socket.getInputStream());
                 try {
                     message = inputStream.readUTF();
-                    System.out.println(name + ": " + message);
 
                 } catch (SocketException e) {
                     System.exit(0);

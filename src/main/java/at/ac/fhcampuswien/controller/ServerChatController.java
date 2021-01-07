@@ -1,36 +1,39 @@
 package at.ac.fhcampuswien.controller;
 
 import at.ac.fhcampuswien.model.PopupWindow;
-import at.ac.fhcampuswien.thread.ReceiveMessageThread;
 import at.ac.fhcampuswien.thread.ReceiveMessageThreadForServer;
-import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ServerChatController implements Initializable {
     private String previousMessage;
+
     @FXML
     private Button btnSend;
-
     @FXML
     private TextArea textFieldArea;
-
     @FXML
     private TextField textFieldMessages;
+    @FXML
+    private MenuItem menuDisconnect;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        textFieldArea.setText("Messages:\n");
+        timer();
+    }
 
     @FXML
     void btnSendAction(ActionEvent event) throws IOException {
@@ -67,16 +70,29 @@ public class ServerChatController implements Initializable {
     }
 
     @FXML
-    private MenuItem menuDisconnect;
-    @FXML
-    void disconnectAction(ActionEvent event) {
-        PopupWindow.display("Disconnected!");
-        System.exit(0);
+    void disconnectAction(ActionEvent event) throws IOException {
+        menuDisconnect();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        textFieldArea.setText("Messages:\n");
-        timer();
+    private void menuDisconnect() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Disconnecting...");
+        alert.setHeaderText("You are about to disconnect from Server. \nWould you like to proceed?");
+
+        ButtonType stay = new ButtonType("Stay");
+        ButtonType disconnect = new ButtonType("Disconnect");
+
+        alert.getButtonTypes().clear();         // Remove default ButtonTypes
+
+        alert.getButtonTypes().addAll(stay, disconnect);
+
+        Optional<ButtonType> option = alert.showAndWait();
+
+        if (option.get() == stay) {
+            alert.close();
+        } else if (option.get() == disconnect) {
+            PopupWindow.display("Disconnected!");
+            System.exit(0);
+        }
     }
 }

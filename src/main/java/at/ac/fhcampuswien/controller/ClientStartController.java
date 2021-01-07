@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,8 +25,6 @@ import java.util.ResourceBundle;
 
 public class ClientStartController implements Initializable{
     public static Socket socket;
-    //private static String host = "localhost";
-    //private static int port = 9999;
 
     //TODO: ******* STARTSCREEN *******
     //TextFields Host & Port
@@ -44,11 +43,9 @@ public class ClientStartController implements Initializable{
         String hostString = textFieldHost.getText();
         String portString = textFieldPort.getText();
 
-        //Wenn HOST und PORT korrekt sind, dann schließe das alte und öffne das neue Fenster:
         try {
             socket = new Socket(hostString, Integer.parseInt(portString));
             if (socket.isConnected() && portString.equals(String.valueOf(socket.getPort()))) {
-                System.out.println("Connection successful!");
                 PopupWindow.display("Connection successful!");
 
                 Parent root = FXMLLoader.load(getClass().getResource("/ClientChatScreen.fxml"));
@@ -60,40 +57,25 @@ public class ClientStartController implements Initializable{
                 stage.setTitle("- Simple Chat Tool - CLIENT -");
                 stage.show();
                 new ReceiveMessageThread(socket, ServerChatController.class.getSimpleName()).start(); //starts ReceiveMessageThread
-
-                //Schließe das alte Fenster:
-                //Stage stage = (Stage) btnConnect.getScene().getWindow();
-                //stage.close();
-
-                //Öffne das neue Fenster:
-                //successfullyConnected();
             } else {
-                System.out.println("Server connection failed!");
-                PopupWindow.display("Server connection failed!\n Wrong Hostname or Port Number");
+                PopupWindow.display("           Server connection failed!\n Wrong Hostname or Port Number");
             }
         } catch (UnknownHostException e) {
-            PopupWindow.display("Server connection failed!\n Cannot find host '" + hostString + "'");
+            PopupWindow.display("           Server connection failed!\n Cannot find host '" + hostString + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //"implements Initializable" gets you the Method "initialize", which ist the first to start.
     //das erste was passiert, wenn die Szene geladen wird: u.a. ButtonConnect wird Disabled.
-    //Andere Methode: im Scenebuilder den Button Disabeln.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnConnect.setDisable(true);
-
     }
     //Macht den Button interagierbar:
     @FXML
     void keyReleasedProperty(KeyEvent event) {
         String hostString = textFieldHost.getText();
         String portString = textFieldPort.getText();
-
-        //sout - um zu sehen ob die Verknüpfung funktioniert.
-        //System.out.println(hostString);
-        //System.out.println(portString);
 
         //Hier wird entschieden, ob der Connect-Button wieder aufscheint:
         //Wir schauen ob im TextField etwas drinnen ist oder nicht.
@@ -113,29 +95,14 @@ public class ClientStartController implements Initializable{
         if (promptText.equals("hostname")) {
             textFieldHost.setTooltip(ToolTipWindow.createToolTip("Hostname mind. 2 Zeichen"));
         } else if (promptText.equals("port")) {
-            textFieldPort.setTooltip(ToolTipWindow.createToolTip("Port mind. 4 Zeichen"));
+            textFieldPort.setTooltip(ToolTipWindow.createToolTip("Gib bitte mind. 4 Ziffern ein!"));
         }
-        //Immer wenn man mit der Maus über die TextFields fährt:
-        //System.out.println("Test");
-        //Andere Methode OHNE PromptText: Zwei verschiedene Events erstellen.
-        //ODER: Binding Label und TextField möglich?????
     }
-    //TODO: ******* CHATSCREEN *******
-    /*Andere Methode ein neues Fenster aufzurufen
-    public void successfullyConnected() {
-        try {
-            Stage stage = new Stage();                  //Normales Fenster
-            FXMLLoader fxmlLoader = new FXMLLoader();
-
-            Pane root = (Pane)fxmlLoader.load(getClass().getResource("/ClientChatScreen.fxml").openStream());
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("- Simple Chat Tool -");
-            stage.setResizable(false);
-            stage.show();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-         */
+    @FXML
+    private MenuItem menuQuit;
+    @FXML
+    void quitAction(ActionEvent event) {
+        PopupWindow.display("Disconnected!");
+        System.exit(0);
+    }
 }

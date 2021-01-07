@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -18,22 +17,7 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Quit" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <Menu mnemonicParsing="false" text="Theme">
-                            <items>
-                                <CheckMenuItem mnemonicParsing="false" text="Light" />
-                                <CheckMenuItem mnemonicParsing="false" text="Dark" />
-                            </items>
-                        </Menu>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About Simple Chat Tool" />
+                        <MenuItem fx:id="menuQuit" mnemonicParsing="false" onAction="#quitAction" text="Quit" />
                     </items>
                 </Menu>
             </menus>
@@ -45,12 +29,12 @@
                         <Font name="Bangla MN" size="35.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="168.0" layoutY="144.0" text="Port:">
+                <Label alignment="CENTER" layoutX="168.0" layoutY="145.0" text="Port:">
                     <font>
                         <Font size="20.0" />
                     </font></Label>
                 <Button fx:id="btnConnect" defaultButton="true" disable="true" layoutX="386.0" layoutY="221.0" mnemonicParsing="false" onAction="#btnConnectAction" text="Connect" />
-                <TextField fx:id="textFieldPort" alignment="CENTER" layoutX="270.0" layoutY="146.0" onKeyReleased="#keyReleasedProperty" onMouseEntered="#enteredMouseAction" style="-fx-border-color: #e0e0e0; -fx-background-color: #ffff; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 40;" />
+                <TextField fx:id="textFieldPort" alignment="CENTER" layoutX="270.0" layoutY="147.0" onKeyReleased="#keyReleasedProperty" onMouseEntered="#enteredMouseAction" style="-fx-border-color: #e0e0e0; -fx-background-color: #ffff; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 40;" />
                 <Label alignment="BOTTOM_RIGHT" layoutX="286.0" layoutY="262.0" prefHeight="17.0" prefWidth="167.0" style="&#10;" text="made by &quot;Die Gefährten&quot;" textAlignment="RIGHT" textFill="#6b6b6b">
                     <font>
                         <Font size="10.0" />
