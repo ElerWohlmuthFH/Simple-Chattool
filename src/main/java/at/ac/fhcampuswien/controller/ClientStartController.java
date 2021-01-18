@@ -58,10 +58,10 @@ public class ClientStartController implements Initializable{
                 stage.show();
                 new ReceiveMessageThread(socket, ServerChatController.class.getSimpleName()).start(); //starts ReceiveMessageThread
             } else {
-                PopupWindow.display("           Server connection failed!\n Wrong Hostname or Port Number");
+                PopupWindow.display("Server connection failed!\n Wrong Hostname or Port Number");
             }
         } catch (UnknownHostException e) {
-            PopupWindow.display("           Server connection failed!\n Cannot find host '" + hostString + "'");
+            PopupWindow.display("Server connection failed!\n Cannot find host '" + hostString + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }

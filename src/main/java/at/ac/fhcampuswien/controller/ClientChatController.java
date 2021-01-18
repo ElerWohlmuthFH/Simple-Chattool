@@ -32,6 +32,7 @@ public class ClientChatController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         textFieldArea.setText("Messages:\n");
+        textFieldArea.setWrapText(true);
         btnSend.setDisable(true);
         timer();
     }
@@ -44,6 +45,7 @@ public class ClientChatController implements Initializable {
         outputStream.flush();
 
         textFieldArea.appendText("Client: "+ messageToSend + "\n");
+        textFieldArea.setWrapText(true);
         textFieldMessages.clear();
     }
 

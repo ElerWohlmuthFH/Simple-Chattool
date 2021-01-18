@@ -32,6 +32,7 @@ public class ServerChatController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         textFieldArea.setText("Messages:\n");
+        textFieldArea.setWrapText(true);
         timer();
     }
 
@@ -43,6 +44,7 @@ public class ServerChatController implements Initializable {
         outputStream.flush();
 
         textFieldArea.appendText("Server: "+ messageToSend + "\n");
+        textFieldArea.setWrapText(true);
         textFieldMessages.clear();
     }
     public void timer() {
@@ -95,4 +97,5 @@ public class ServerChatController implements Initializable {
             System.exit(0);
         }
     }
+
 }
