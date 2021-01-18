@@ -57,13 +57,11 @@ public class ClientStartController implements Initializable{
                 stage.setTitle("- Simple Chat Tool - CLIENT -");
                 stage.show();
                 new ReceiveMessageThread(socket, ServerChatController.class.getSimpleName()).start(); //starts ReceiveMessageThread
-            } else {
-                PopupWindow.display("Server connection failed!\n Wrong Hostname or Port Number");
             }
         } catch (UnknownHostException e) {
-            PopupWindow.display("Server connection failed!\n Cannot find host '" + hostString + "'");
+            PopupWindow.display("Server connection failed!\n   Cannot find host '" + hostString + "'");
         } catch (Exception e) {
-            e.printStackTrace();
+            PopupWindow.display("Server connection failed!\n      Wrong Port Number!");
         }
     }
     //das erste was passiert, wenn die Szene geladen wird: u.a. ButtonConnect wird Disabled.
@@ -81,10 +79,11 @@ public class ClientStartController implements Initializable{
         //Wir schauen ob im TextField etwas drinnen ist oder nicht.
         boolean isDisabled = (
                 hostString.isEmpty() || hostString.trim().isEmpty() || hostString.length() < 2)
-                || (portString.isEmpty() || portString.trim().isEmpty() || portString.length() < 4);
+                || (portString.isEmpty() || portString.trim().isEmpty() || portString.matches("[a-zA-Z]+")  || portString.length() < 4);
         //Das übergeben wir an den Connect-Button:
         btnConnect.setDisable(isDisabled);
     }
+
     //Event wenn man mit der Maus über die TextFields fährt: ToolTip.
     @FXML
     void enteredMouseAction(MouseEvent event) {
@@ -98,6 +97,7 @@ public class ClientStartController implements Initializable{
             textFieldPort.setTooltip(ToolTipWindow.createToolTip("Gib bitte mind. 4 Ziffern ein!"));
         }
     }
+
     @FXML
     private MenuItem menuQuit;
     @FXML

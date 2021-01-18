@@ -47,6 +47,7 @@ public class ServerChatController implements Initializable {
         textFieldArea.setWrapText(true);
         textFieldMessages.clear();
     }
+
     public void timer() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -97,5 +98,4 @@ public class ServerChatController implements Initializable {
             System.exit(0);
         }
     }
-
 }

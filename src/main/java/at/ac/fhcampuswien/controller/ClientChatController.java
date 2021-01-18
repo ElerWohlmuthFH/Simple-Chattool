@@ -60,6 +60,7 @@ public class ClientChatController implements Initializable {
             }
         }, 1000, 1000);
     }
+
     public void appendText() {
         textFieldArea.appendText("Server: " + ReceiveMessageThread.message);
         textFieldArea.appendText("\n");

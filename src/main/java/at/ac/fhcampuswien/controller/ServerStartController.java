@@ -50,11 +50,9 @@ public class ServerStartController {
                 stage.show();
 
                 new ReceiveMessageThreadForServer(socket, ClientChatController.class.getSimpleName()).start();
-            } else {
-                PopupWindow.display("Client  connection failed!\n Port Number");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            PopupWindow.display("Server connection failed!\n      Wrong Port Number!");
         }
     }
 
@@ -66,7 +64,7 @@ public class ServerStartController {
     @FXML
     void keyReleasedProperty(KeyEvent event) {
         String portString = textFieldPort.getText();
-        boolean isDisabled = (portString.isEmpty() || portString.trim().isEmpty() || portString.length() < 4);
+        boolean isDisabled = (portString.isEmpty() || portString.trim().isEmpty() || portString.matches("[a-zA-Z]+") || portString.length() < 4);
         //Bereits im SceneBuilder Disabled.
         btnConnect.setDisable(isDisabled);
     }
